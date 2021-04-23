@@ -32,17 +32,32 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-   axios.post('http://localhost:8080/',{
-      username: this.state.username,
-      password: this.state.password
-    }).then(function (response){
-      alert("the response",response.status)
-    }).catch(function(err){
-        alert(err.response.status)
-      
-      
-    })
-  }
+    if(this.state.switchForm === false){  
+    await axios.post('http://localhost:8080/user/signup',{
+       username: this.state.username,
+       password: this.state.password
+     }).then(function (response){
+       alert("the response",response.status)
+     }).catch(function(err){
+         alert(err.response.status)
+       
+       
+     })
+    } else {
+     await axios.post('http://localhost:8080/user/login',{
+        username: this.state.username,
+        password: this.state.password
+      }).then(function (response){
+        alert("the response",response.status)
+      }).catch(function(err){
+          alert(err.response.status)
+        
+        
+      })
+
+    }
+   }
+  
 
   
 

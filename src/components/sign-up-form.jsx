@@ -1,4 +1,5 @@
 import React from "react"
+import axios from "axios";
 
 export class SignUp extends React.Component{
     constructor(props){

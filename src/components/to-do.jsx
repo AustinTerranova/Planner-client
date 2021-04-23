@@ -8,12 +8,6 @@ export class ToDo extends React.Component{
         
     }
 
-
-
-    
-
-
-
     render(){
         return( 
             <div>
