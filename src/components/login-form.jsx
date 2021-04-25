@@ -1,12 +1,13 @@
 import React from 'react'
 import axios from "axios";
+import {Link} from 'react-router-dom'
 
 export class Login extends React.Component{
     constructor(props){
         super(props)
 
         this.loginFormSubmitClick = this.loginFormSubmitClick.bind(this)
-        this.switchToSignUpClick = this.switchToSignUpClick.bind(this)
+      
     }
 
 
@@ -21,9 +22,19 @@ export class Login extends React.Component{
         event.preventDefault()
     }
 
-    switchToSignUpClick(){
-        this.props.handleForm(false) //when the h2 Sign Up is clicked it will send false to the switchform function which will set the state to false
-    }
+   componentDidUpdate(){
+    axios.post('http://localhost:8080/user/login',{
+        username: this.props.username,
+        password: this.props.password
+      }).then(function (response){
+        alert("the response",response.status)
+      }).catch(function(err){
+          alert(err.response.status)
+        
+        
+      })
+        
+   }
 
     
 
@@ -32,7 +43,7 @@ export class Login extends React.Component{
             <div class="wrapper fadeInDown">
                 <div id="formContent">
                     <h2 class="active"> Sign In </h2>
-                    <h2 onClick = {this.switchToSignUpClick} class="inactive underlineHover">Sign Up</h2>
+                    <Link to='/user/signup'><h2 class="inactive underlineHover">Sign Up</h2></Link>
                     <form  onSubmit={this.loginFormSubmitClick}>
                         <input name="username"  type="text" id="login" placeholder="Username" class="fadeInSecond"></input>
                         <input name="password"  type="text" id="password" placeholder="Password" class="fadeInThird"></input>
