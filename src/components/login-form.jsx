@@ -47,7 +47,7 @@ export class Login extends React.Component{
                     <form  onSubmit={this.loginFormSubmitClick}>
                         <input name="username"  type="text" id="login" placeholder="Username" class="fadeInSecond"></input>
                         <input name="password"  type="text" id="password" placeholder="Password" class="fadeInThird"></input>
-                        <input  type="submit" value="Log In" class="fadeIn Fourth"></input>
+                        <Link to='/user/todo'><input  type="submit" value="Log In" class="fadeIn Fourth"/></Link>
                     </form>
 
                     <div id="forumFooter">
