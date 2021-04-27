@@ -12,10 +12,17 @@ class App extends React.Component {
     this.state = {
       switchForm: true,
       username: '',
-      password: ""
+      password: "",
+      dialogBox: false,
+      authenticated: false
     }
+
+
     this.handleUsername = this.handleUsername.bind(this)
     this.handlePassword = this.handlePassword.bind(this)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClickClose = this.handleClickClose.bind(this)
+    this.handleAuthentication = this.handleAuthentication(this)
     
   }
 
@@ -28,6 +35,16 @@ class App extends React.Component {
   handlePassword = (password) => {
     this.setState({password: password})
   }
+  handleClickOpen = (openDialog) => {     //openDialogue is a boolean
+    this.setState({dialogBox: openDialog})
+  }
+  handleClickClose = (closeDialog) => {      //closeDialogue is a boolean
+    this.setState({dialogBox: closeDialog})
+  }
+  handleAuthentication = (auth) => {
+    this.setState({authenticated: auth})
+  }
+
 
   
 
@@ -43,15 +60,21 @@ class App extends React.Component {
               username = {this.state.username}
               password = {this.state.password}
               handleForm={this.handleForm} 
+              handleAuthentication = {this.handleAuthentication}
               handlePassword={this.handlePassword} 
               handleUsername={this.handleUsername} 
             />
           </Route>
           <Route exact path ='/user/todo'>
-            <ToDo/>
+            <ToDo 
+              open={this.state.dialogBox}
+              handleClickOpen={this.handleClickOpen}
+              handleClickClose={this.handleClickClose}
+            />
           </Route>
           <Route exact path = '/user/signup'>
-            <SignUp 
+            <SignUp
+              handleAuthentication = {this.handleAuthentication} 
               username = {this.state.username}
               password = {this.state.password}
               handleForm={this.handleForm}

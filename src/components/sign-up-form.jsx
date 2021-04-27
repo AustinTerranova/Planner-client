@@ -31,6 +31,11 @@ export class SignUp extends React.Component{
        alert("the response",response.status)
      }).catch(function(err){
          alert(err.response.status)
+         if(err.response.status === 401){
+            this.props.handleAuthentication(false)
+        } else {
+          this.props.handleAuthentication(true)
+        }
        
        
      })
